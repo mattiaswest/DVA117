@@ -1,0 +1,4 @@
+﻿  main.c
+C:\Users\matti\DVA117\Theme4\Lab4-1\Lab4-1\main.c(20,15): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\matti\DVA117\Theme4\Lab4-1\Lab4-1\main.c(27): warning C4172: returning address of local variable or temporary: arr
+  Lab4-1.vcxproj -> C:\Users\matti\DVA117\Theme4\Lab4-1\Debug\Lab4-1.exe
