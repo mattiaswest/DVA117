@@ -12,7 +12,7 @@ int playerGuess()
 {
 	int guessInput = 0;
 	int answer = randomNumber();
-	int i = 0;
+	int guessCount = 0;
 	do
 	{
 		scanf_s("%d", &guessInput);
@@ -28,9 +28,9 @@ int playerGuess()
 		{
 			printf("Congratulations, that is correct!\n");
 		}
-		i++;
+		guessCount++;
 	} while (guessInput != answer);
-	return i;
+	return guessCount;
 }
 
 int main(void)
