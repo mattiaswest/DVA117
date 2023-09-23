@@ -36,11 +36,17 @@ int main(void)
 				numberHigh = numberInput;
 			}
 		}
-
-		printf("The smallest number is: %d\n", numberLow);
-		printf("The biggest number is: %d\n", numberHigh);
-		printf("The sum of the numbers is: %d\n", numberSum);
-		printf("The average value is: %f\n", (float)numberSum / numberCounter); //Calculating the mean value by dividing the total sum with number of inputs
+		if (numberCounter == 0)
+		{
+			printf("You didn't enter any positive numbers, nothing to output.");
+		}
+		else
+		{
+			printf("The smallest number is: %d\n", numberLow);
+			printf("The biggest number is: %d\n", numberHigh);
+			printf("The sum of the numbers is: %d\n", numberSum);
+			printf("The average value is: %f\n", (float)numberSum / numberCounter); //Calculating the mean value by dividing the total sum with number of inputs
+		}
 		do
 		{
 			printf("\n\n\nWould you like to run the program again? (1=yes 0=no)"); //Asking user if they want to continue, 1 will restart initial while loop.
