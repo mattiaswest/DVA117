@@ -11,7 +11,7 @@ int main(void)
 	int arrInput[SIZE];
 	int numberMostFrequent = 0;
 	int numberFrequency = 0;
-	 
+
 	printf("Please enter numbers between 0 and 1000, both of these included (max 100 numbers). End with a negative number.\n");
 	for (int i = 0; i < SIZE; i++)
 	{
@@ -27,8 +27,13 @@ int main(void)
 		else
 			i--;
 	}
-	mostFrequentNumber(arrInput, &numberMostFrequent, &numberFrequency, inputCount);
-	printf("The most frequent number of the array is %d, it occurrs %d times", numberMostFrequent, numberFrequency);
+	if (inputCount != 0) //Added this IF-statement after feedback
+	{
+		mostFrequentNumber(arrInput, &numberMostFrequent, &numberFrequency, inputCount);
+		printf("The most frequent number of the array is %d, it occurrs %d times", numberMostFrequent, numberFrequency);
+	}
+	else
+		printf("You didn't enter any numbers, nothing to output");
 	return 0;
 }
 

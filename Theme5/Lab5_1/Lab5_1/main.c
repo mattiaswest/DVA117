@@ -23,7 +23,7 @@ int squareRoot(float *pNumber)
 {
 	if (*pNumber >= 0)
 	{
-		*pNumber *= *pNumber;
+		*pNumber = sqrt(*pNumber); // Changed from squaring a number to taking the square root of it
 		return 1;
 	}
 	else
