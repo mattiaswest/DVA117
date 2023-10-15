@@ -12,7 +12,8 @@ void addItem(struct ShoppingList* list)
 	if (i < 5) {
 		printf("Name of item: ");
 		fgets(list->itemList[i].productName, MAX, stdin);
-		list->itemList[i].productName[strlen(list->itemList[i].productName) - 1] = "\0";
+		int len = strlen(list->itemList[i].productName);
+		list->itemList[i].productName[len - 1] = '\0';
 
 		do {
 			printf("Amount: ");
