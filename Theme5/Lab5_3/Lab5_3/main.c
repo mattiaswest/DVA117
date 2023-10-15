@@ -16,7 +16,7 @@ int main(void)
 	for (int i = 0; i < SIZE; i++)
 	{
 		printf("Number: ");
-		scanf("%d", &input);
+		scanf_s("%d", &input);
 		if (input >= 0 && input <= 1000)
 		{
 			arrInput[i] = input;
