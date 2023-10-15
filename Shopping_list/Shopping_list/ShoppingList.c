@@ -9,6 +9,7 @@ void addItem(struct ShoppingList* list)
 {
 	while (getchar() != '\n');
 	int i = list->length;
+	printf("Items in shopping list: %d\n", list->length);
 	if (i < 5) {
 		printf("Name of item: ");
 		fgets(list->itemList[i].productName, MAX, stdin);
@@ -72,10 +73,14 @@ void editItem(struct ShoppingList* list)
 void removeItem(struct ShoppingList* list)
 {
 	int entry;
-	printf("What item would you like to remove?: ");
-	scanf_s("%d", &entry);
-	if (inList(entry, list))
-	{
+	if (list->length > 0) {
+		printf("What item would you like to remove?: ");
+		do {
+			scanf_s("%d", &entry);
+			if (inList(entry, list) != 1)
+				printf("Entry not in list!");
+		} while (inList(entry, list) != 1);
+
 		if (entry == list->length)
 		{
 			list->length = list->length - 1;
@@ -89,6 +94,8 @@ void removeItem(struct ShoppingList* list)
 			list->length = list->length - 1;
 		}
 	}
+	else
+		printf("Your list is empty, nothing to remove!");
 }
 
 /*saveList och loadList implementeras i laboration 7*/
