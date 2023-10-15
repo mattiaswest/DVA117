@@ -21,6 +21,7 @@ struct ShoppingList {
  // Function declarations
 
 int isPositive(float number);
+int inList(int entry, struct ShoppingList* list);
 void addItem(struct ShoppingList* list);
 void printList(struct ShoppingList* list);
 void editItem(struct ShoppingList* list);

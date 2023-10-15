@@ -7,7 +7,6 @@
 
 void addItem(struct ShoppingList* list)
 {
-	printf("Items in list: %d\n", list->length);
 	while (getchar() != '\n');
 	int i = list->length;
 	if (i < 5) {
@@ -53,9 +52,10 @@ void editItem(struct ShoppingList* list)
 	printf("Which entry would you like to edit?: \n");
 	do {
 		scanf_s("%d", &entry);
-		if (isPositive(entry) != 1 || entry > list->length)
+		if (inList(entry, list) != 1) {
 			printf("Your entry is not on the list!\n");
-	} while (isPositive(entry) != 1 || entry > list->length);
+		}
+	} while (inList(entry, list) != 1);
 	printf("New amount for %s: ", list->itemList[entry-1].productName);
 	do {
 		scanf_s("%f", &amountNew);
@@ -70,7 +70,24 @@ void editItem(struct ShoppingList* list)
 
 void removeItem(struct ShoppingList* list)
 {
-
+	int entry;
+	printf("What item would you like to remove?: ");
+	scanf_s("%d", &entry);
+	if (inList(entry, list))
+	{
+		if (entry == list->length)
+		{
+			list->length = list->length - 1;
+		}
+		else
+		{
+			for (int i = entry; i < list->length; i++)
+			{
+				list->itemList[i - 1] = list->itemList[i];
+			}
+			list->length = list->length - 1;
+		}
+	}
 }
 
 /*saveList och loadList implementeras i laboration 7*/
@@ -90,5 +107,13 @@ int isPositive(float number)
 		return 1;
 	else
 		return 0;
+}
+
+int inList(int entry, struct ShoppingList* list)
+{
+	if (isPositive(entry) != 1 || entry > list->length)
+		return 0;
+	else
+		return 1;
 }
 
