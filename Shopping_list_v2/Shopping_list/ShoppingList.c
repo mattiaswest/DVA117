@@ -146,81 +146,36 @@ void saveList(struct ShoppingList* list)
 
 void loadList(struct ShoppingList* list)
 {
-	int trashTemp[5], tempLength, i;
+	int i = 0;
 	char fileName[MAX];
-
+	while (getchar() != '\n');
+	fgets(fileName, MAX, stdin);
+	fileName[strlen(fileName) - 1] = '\0';
+	FILE* fp = fopen(fileName, "r");
+	if (fp == NULL)
+	{
+		printf("Could not open file");
+		return;
+	}
+	fscanf_s(fp, "%d", &list->length);
+	if (list->itemList != NULL)
+	{
+		free(list->itemList);
+		list->itemList = NULL;
+	}
+	list->itemList = (struct GroceryItem*)calloc(list->length, sizeof(struct GroceryItem));
 	if (list->itemList == NULL)
 	{
-		while (getchar() != '\n');
-		printf("Enter Filename: ");
-		fgets(fileName, 20, stdin);
-		fileName[strlen(fileName) - 1] = '\0';
-
-		FILE* fp = fopen(fileName, "r");
-		if (fp == NULL)
-		{
-			printf("Can't open file!");
-			return;
-		}
-
-		fscanf_s(fp, "%d", &list->length);
-		fgetc(fp);
-		list->itemList = (struct GroceryItem*)malloc(list->length * sizeof(struct GroceryItem));
-		if (list->itemList == NULL)
-		{
-			printf("Can't allocate memory!");
-		}
-		for (int i = 0; i < list->length; i++)
-		{
-
-			fgets(trashTemp, 5, fp);
-			trashTemp[strlen(trashTemp) - 1] = '\0';
-			fgets(list->itemList[i].productName, MAX, fp);
-			list->itemList[i].productName[strlen(list->itemList[i].productName) - 1] = '\0';
-			fscanf_s(fp, "%f\n", &list->itemList[i].amount);
-			fgets(list->itemList[i].unit, MAX, fp);
-			list->itemList[i].unit[strlen(list->itemList[i].unit) - 1] = '\0';
-		}
-
-		fclose(fp);
+		printf("ERROR!");
+		return;
 	}
-	else
+	for (i = 0; i < list->length; i++)
 	{
-		printf("Enter Filename: ");
-		scanf("%s", &fileName);
-		while(getchar() != '\n');
-
-		FILE* fp = fopen(fileName, "r");
-		if (fp == NULL)
-		{
-			printf("Can't open file!");
-			return;
-		}
-
-		free(fp);
-		fscanf_s(fp, "%d", &tempLength);
-		fgetc(fp);
-		if (!reallocateMemory(&list->itemList, list->length + tempLength)) {
-			printf("Failed to reallocate memory!");
-			return;
-		}
-
-
-		i = list->length;
-		list->length = list->length + tempLength;
-		for (i; i < list->length; i++)
-		{
-			fgets(trashTemp, 5, fp);
-			trashTemp[strlen(trashTemp) - 1] = '\0';
-			fgets(list->itemList[i].productName, MAX, fp);
-			list->itemList[i].productName[strlen(list->itemList[i].productName) - 1] = '\0';
-			fscanf_s(fp, "%f\n", &list->itemList[i].amount);
-			fgets(list->itemList[i].unit, MAX, fp);
-			list->itemList[i].unit[strlen(list->itemList[i].unit) - 1] = '\0';
-
-		}
-		fclose(fp);
+		fscanf(fp, "%s ", list->itemList[i].productName);
+		fscanf(fp, "%f ", &list->itemList[i].amount);
+		fscanf(fp, "%s\n", list->itemList[i].unit);
 	}
+	fclose(fp);
 }
 
 int isPositive(float number)
